@@ -10,26 +10,31 @@ function startTimer() {
   minutesRef.textContent = `00`;
   secondsRef.textContent = `00`;
   
-  const targetDate = new Date('May 17, 2021');
+  const targetDate = new Date('Apr 30, 2021');
   console.log(targetDate);
   
   const intervalId = setInterval(() => {
     const currentTime = Date.now()
     const deltaTime = targetDate - currentTime;
   
-    updateClockface(deltaTime);
+    updateTime(deltaTime);
 
   }, 1000)
 
   return intervalId
 };
 
-function updateClockface(time) {
+function updateTime(time) {
   
   const days = pad2(Math.floor(time / (1000 * 60 * 60 * 24)));
   const hours = pad(Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
   const mins = pad(Math.floor((time % (1000 * 60 * 60)) / (1000 * 60)));
   const secs = pad(Math.floor((time % (1000 * 60)) / 1000));
+
+  updateClockface(days, hours, mins, secs);
+};
+
+function updateClockface(days, hours, mins, secs) { 
 
   daysRef.textContent = `${days}`;
   hoursRef.textContent = `${hours}`;
